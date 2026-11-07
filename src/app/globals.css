@@ -1,0 +1,239 @@
+@import "tailwindcss";
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
+@import "@fontsource-variable/instrument-sans/index.css";
+
+/*
+  Caderninho — papel, tinta e linhas finas.
+  Cores semânticas: a mesma classe funciona no modo claro e escuro.
+*/
+:root {
+  --paper: #f5f3ee;
+  --surface: #fdfcf9;
+  --sunken: #edeae3;
+  --ink: #1b1a17;
+  --ink-2: #5a564e;
+  --ink-3: #8c877d;
+  --line: #e2ded4;
+  --line-strong: #cbc5b8;
+  --debt: #a83c2a;
+  --debt-soft: #f4e3dd;
+  --paid: #2c6a45;
+  --paid-soft: #e0ede3;
+  --warn: #946012;
+  --warn-soft: #f3e8d2;
+  --mark: #f2df74;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141412;
+    --surface: #1b1b19;
+    --sunken: #242420;
+    --ink: #ebe8e1;
+    --ink-2: #a9a499;
+    --ink-3: #75716a;
+    --line: #2b2a27;
+    --line-strong: #3c3a36;
+    --debt: #e38a77;
+    --debt-soft: #36211c;
+    --paid: #84c39d;
+    --paid-soft: #1c2c22;
+    --warn: #d9ad62;
+    --warn-soft: #30281a;
+    --mark: #5c5219;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --font-sans: "Instrument Sans Variable", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Newsreader Variable", "Iowan Old Style", Georgia, serif;
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-debt: var(--debt);
+  --color-debt-soft: var(--debt-soft);
+  --color-paid: var(--paid);
+  --color-paid-soft: var(--paid-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-mark: var(--mark);
+}
+
+@theme {
+  --animate-in: enter 0.16s ease-out;
+  --animate-fade: fade 0.12s ease-out;
+  --animate-shake: shake 0.35s ease-in-out;
+
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes shake {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    20%,
+    60% {
+      transform: translateX(-6px);
+    }
+    40%,
+    80% {
+      transform: translateX(6px);
+    }
+  }
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--mark);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Números grandes: serifada com algarismos tabulares, como num livro-caixa */
+.figure {
+  font-family: var(--font-serif);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-weight: 450;
+  letter-spacing: -0.01em;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-lg border border-line bg-surface;
+  }
+  .rule {
+    @apply border-line;
+  }
+
+  .btn {
+    @apply inline-flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-md px-3.5 text-[13.5px] font-medium whitespace-nowrap transition-colors select-none disabled:pointer-events-none disabled:opacity-40;
+  }
+  .btn-sm {
+    @apply h-7 px-2.5 text-[12.5px];
+  }
+  .btn-lg {
+    @apply h-10 px-4 text-[14px];
+  }
+  .btn-primary {
+    @apply bg-ink text-paper hover:opacity-85;
+  }
+  .btn-secondary {
+    @apply border border-line-strong bg-surface text-ink hover:bg-sunken;
+  }
+  .btn-ghost {
+    @apply text-ink-2 hover:bg-sunken hover:text-ink;
+  }
+  .btn-paid {
+    @apply bg-paid text-surface hover:opacity-90;
+  }
+  .btn-danger {
+    @apply bg-debt text-surface hover:opacity-90;
+  }
+  .btn-icon {
+    @apply h-8 w-8 px-0;
+  }
+
+  .input {
+    @apply h-10 w-full rounded-md border border-line-strong bg-surface px-3 text-[14px] text-ink transition-colors outline-none placeholder:text-ink-3 focus:border-ink;
+  }
+  textarea.input {
+    @apply h-auto py-2.5 leading-relaxed;
+  }
+  select.input {
+    @apply cursor-pointer pr-8;
+  }
+  .label {
+    @apply mb-1.5 block text-[12.5px] font-medium text-ink-2;
+  }
+  .hint {
+    @apply mt-1.5 text-[12px] leading-snug text-ink-3;
+  }
+
+  /* Abas com sublinhado, usadas como filtros */
+  .tabs {
+    @apply flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-line;
+  }
+  .tab {
+    @apply -mb-px inline-flex cursor-pointer items-center gap-1.5 border-b-2 border-transparent pt-1 pb-2 text-[13.5px] text-ink-3 transition-colors hover:text-ink;
+  }
+  .tab[data-active="true"] {
+    @apply border-ink font-medium text-ink;
+  }
+  .count {
+    @apply text-[12px] text-ink-3 tabular-nums;
+  }
+
+  .kbd {
+    @apply inline-flex h-[18px] min-w-[18px] items-center justify-center rounded border border-current/25 px-1 font-sans text-[10.5px] font-medium opacity-60;
+  }
+
+  /* Linha pontilhada entre texto e valor */
+  .leader {
+    @apply mx-2 min-w-4 flex-1 translate-y-[-4px] border-b border-dotted border-line-strong;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+@media print {
+  :root {
+    --paper: #fff;
+    --surface: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-full {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+}
