@@ -95,7 +95,7 @@ export function StudentsView() {
       </div>
 
       {list.length === 0 ? (
-        <EmptyState
+        <div className="panel mt-4"><EmptyState
           title={data.summaries.length ? "Ninguém com esses filtros." : "Nenhum aluno ainda."}
           text={data.summaries.length ? "Tente limpar a busca ou trocar a aba." : "Cadastre o primeiro aluno para começar a anotar."}
           action={
@@ -105,8 +105,9 @@ export function StudentsView() {
               </button>
             )
           }
-        />
+        /></div>
       ) : (
+        <div className="panel mt-4 overflow-x-auto px-5 pb-4">
         <table className="w-full text-[14px]">
           <thead>
             <tr className="border-b border-line text-left text-[12px] text-ink-3">
@@ -173,6 +174,7 @@ export function StudentsView() {
             </tr>
           </tfoot>
         </table>
+        </div>
       )}
     </div>
   );

@@ -49,16 +49,16 @@ export function Modal({
   const width = { sm: "max-w-md", md: "max-w-xl", lg: "max-w-3xl", xl: "max-w-5xl" }[size];
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-start sm:px-6 sm:pt-[8vh]" role="dialog" aria-modal>
-      <div className="absolute inset-0 animate-fade bg-[#1b1a17]/35" onClick={onClose} />
+      <div className="absolute inset-0 animate-fade bg-[var(--overlay)] backdrop-blur-[3px]" onClick={onClose} />
       <div
         className={cx(
-          "relative flex max-h-[90vh] w-full animate-in flex-col overflow-hidden rounded-t-xl border border-line bg-surface shadow-[0_24px_60px_-20px_rgba(0,0,0,0.35)] sm:max-h-[84vh] sm:rounded-xl",
+          "relative flex max-h-[90vh] w-full animate-in flex-col overflow-hidden rounded-t-[24px] border border-line bg-card shadow-[0_30px_80px_-24px_rgba(0,0,0,0.55)] sm:max-h-[84vh] sm:rounded-[24px]",
           width,
         )}
       >
-        <div className="flex items-start gap-3 px-6 pt-5 pb-4">
+        <div className="flex items-start gap-3 px-6 pt-6 pb-4">
           <div className="min-w-0 flex-1">
-            <h2 className="text-[16px] font-semibold">{title}</h2>
+            <h2 className="text-[18px] font-semibold tracking-[-0.02em]">{title}</h2>
             {subtitle && <div className="mt-0.5 text-[13px] text-ink-3">{subtitle}</div>}
           </div>
           <button onClick={onClose} className="btn btn-ghost btn-icon -mt-1 -mr-2" aria-label="Fechar">
@@ -66,7 +66,7 @@ export function Modal({
           </button>
         </div>
         <div className="min-h-0 flex-1 overflow-y-auto px-6 pb-6">{children}</div>
-        {footer && <div className="border-t border-line px-6 py-3.5">{footer}</div>}
+        {footer && <div className="border-t border-line bg-surface/60 px-6 py-4">{footer}</div>}
       </div>
     </div>
   );
@@ -161,8 +161,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={t.id}
             className={cx(
-              "pointer-events-auto flex animate-in items-center gap-4 rounded-md px-4 py-2.5 text-[13.5px] shadow-lg",
-              t.kind === "error" ? "bg-debt text-surface" : "bg-ink text-paper",
+              "pointer-events-auto flex animate-in items-center gap-4 rounded-full px-5 py-2.5 text-[13.5px] shadow-xl",
+              t.kind === "error" ? "bg-debt text-surface" : "bg-ink text-surface",
             )}
           >
             <div className="min-w-0">{t.text}</div>
@@ -256,7 +256,7 @@ export function MoneyInput({
 export function EmptyState({ title, text, action }: { title: string; text?: ReactNode; action?: ReactNode }) {
   return (
     <div className="px-6 py-14 text-center">
-      <p className="font-serif text-[19px] italic text-ink-2">{title}</p>
+      <p className="text-[16px] font-semibold tracking-[-0.01em] text-ink-2">{title}</p>
       {text && <p className="mx-auto mt-1.5 max-w-sm text-[13px] text-ink-3">{text}</p>}
       {action && <div className="mt-5">{action}</div>}
     </div>
@@ -265,10 +265,10 @@ export function EmptyState({ title, text, action }: { title: string; text?: Reac
 
 export function PageHeader({ title, subtitle, actions }: { title: string; subtitle?: ReactNode; actions?: ReactNode }) {
   return (
-    <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <header className="mb-7 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h1 className="font-serif text-[34px] leading-none tracking-[-0.01em]">{title}</h1>
-        {subtitle && <p className="mt-2.5 text-[13.5px] text-ink-3">{subtitle}</p>}
+        <h1 className="h-page">{title}</h1>
+        {subtitle && <p className="mt-2 text-[14px] text-ink-3">{subtitle}</p>}
       </div>
       {actions && <div className="no-print flex flex-wrap items-center gap-2">{actions}</div>}
     </header>
@@ -278,7 +278,7 @@ export function PageHeader({ title, subtitle, actions }: { title: string; subtit
 export function SectionTitle({ children, aside }: { children: ReactNode; aside?: ReactNode }) {
   return (
     <div className="mb-3 flex items-baseline justify-between gap-3">
-      <h2 className="text-[13px] font-semibold">{children}</h2>
+      <h2 className="h-sec">{children}</h2>
       {aside && <div className="text-[12.5px] text-ink-3">{aside}</div>}
     </div>
   );

@@ -107,19 +107,19 @@ export function LockScreen({
         : "Só para confirmar.";
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-6 py-12">
-      <div className="w-full max-w-[300px] animate-in text-center">
-        <p className="font-serif text-[28px] italic">Caderninho</p>
-        <div className="mx-auto mt-3 mb-9 h-px w-10 bg-line-strong" />
+    <main className="flex min-h-screen items-center justify-center p-3">
+      <div className="shell-panel w-full max-w-[400px] animate-in px-10 py-12 text-center">
+        <p className="text-[28px] font-bold tracking-[-0.05em]">caderninho</p>
+        <div className="mx-auto mt-4 mb-8 h-px w-24 bg-gradient-to-r from-transparent via-line-strong to-transparent" />
 
-        <h1 className="text-[15px] font-semibold">{title}</h1>
+        <h1 className="text-[20px] font-bold tracking-[-0.03em]">{title}</h1>
         <p className="mt-1 min-h-10 text-[13px] text-ink-3">{subtitle}</p>
 
         <div key={shake} className={`mt-6 flex justify-center gap-4 ${shake ? "animate-shake" : ""}`} aria-label={`${pin.length} de 4 dígitos`}>
           {[0, 1, 2, 3].map((i) => (
             <span
               key={i}
-              className={`h-3 w-3 rounded-full border transition-colors ${i < pin.length ? "border-ink bg-ink" : "border-line-strong"}`}
+              className={`h-3 w-3 rounded-full border transition-colors ${i < pin.length ? "border-accent bg-accent shadow-[0_0_10px_var(--accent)]" : "border-line-strong"}`}
             />
           ))}
         </div>
@@ -138,7 +138,7 @@ export function LockScreen({
             0
           </Key>
           <button
-            className="grid h-14 place-items-center rounded-md text-ink-3 transition-colors hover:bg-sunken hover:text-ink"
+            className="grid h-14 place-items-center rounded-2xl text-ink-3 transition-colors hover:bg-sunken hover:text-ink"
             onClick={() => setPin((p) => p.slice(0, -1))}
             aria-label="Apagar"
           >
@@ -165,7 +165,7 @@ function Key({ children, onClick, disabled }: { children: React.ReactNode; onCli
     <button
       onClick={onClick}
       disabled={disabled}
-      className="figure h-14 rounded-md border border-line bg-surface text-[22px] transition-colors hover:border-line-strong active:bg-sunken disabled:opacity-40"
+      className="gloss figure h-14 rounded-2xl text-[21px] transition active:scale-[0.97] disabled:opacity-40"
     >
       {children}
     </button>

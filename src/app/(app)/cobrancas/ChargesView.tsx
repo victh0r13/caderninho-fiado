@@ -99,11 +99,12 @@ export function ChargesView() {
       </div>
 
       {list.length === 0 ? (
-        <EmptyState
+        <div className="panel mt-4"><EmptyState
           title={debtors.length ? "Ninguém nesta aba." : "Nenhum fiado em aberto."}
           text={debtors.length ? "Troque a aba para ver os outros." : "Todo mundo pagou. Bom descanso."}
-        />
+        /></div>
       ) : (
+        <div className="panel mt-4 overflow-x-auto px-5 pb-4">
         <table className="w-full text-[14px]">
           <thead>
             <tr className="border-b border-line text-left text-[12px] text-ink-3">
@@ -165,6 +166,7 @@ export function ChargesView() {
             </tr>
           </tfoot>
         </table>
+        </div>
       )}
     </div>
   );

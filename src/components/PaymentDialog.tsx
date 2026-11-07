@@ -128,7 +128,7 @@ function Inner({
       <div className="space-y-6">
         <div>
           <label className="label">Valor recebido</label>
-          <MoneyInput value={amount} onChange={setAmount} autoFocus onEnter={submit} inputClassName="figure h-14 text-[26px]" />
+          <MoneyInput value={amount} onChange={setAmount} autoFocus onEnter={submit} inputClassName="figure h-14 rounded-2xl text-[26px]" />
           <div className="mt-2 flex flex-wrap gap-1.5">
             {presets.map((p) => (
               <button
@@ -144,15 +144,14 @@ function Inner({
 
         <div>
           <label className="label">Forma de pagamento</label>
-          <div className="flex overflow-hidden rounded-md border border-line-strong">
+          <div className="flex rounded-full border border-line-strong p-0.5">
             {METHODS.map((id, i) => (
               <button
                 key={id}
                 onClick={() => setMethod(id)}
                 className={cx(
-                  "h-9 flex-1 text-[13px] transition-colors",
-                  i > 0 && "border-l border-line-strong",
-                  method === id ? "bg-ink font-medium text-paper" : "bg-surface text-ink-2 hover:bg-sunken",
+                  "h-8 flex-1 rounded-full text-[13px] transition",
+                  method === id ? "gloss font-medium text-ink" : "border border-transparent text-ink-2 hover:text-ink",
                 )}
               >
                 {id === "desconto" ? "Desconto" : METHOD_LABEL[id]}

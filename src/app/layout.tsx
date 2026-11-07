@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,14 +10,16 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f3ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#141412" },
+    { media: "(prefers-color-scheme: light)", color: "#e8e5df" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0c0b" },
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const tema = (await cookies()).get("tema")?.value;
+  const theme = tema === "light" || tema === "dark" ? tema : undefined;
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" data-theme={theme}>
       <body>{children}</body>
     </html>
   );

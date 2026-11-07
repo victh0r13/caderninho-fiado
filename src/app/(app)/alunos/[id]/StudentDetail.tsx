@@ -107,7 +107,7 @@ export function StudentDetail({
 
       <header className="mt-5 flex flex-wrap items-start justify-between gap-6">
         <div className="min-w-0">
-          <h1 className={cx("font-serif text-[40px] leading-tight", (s.blocked || s.archived) && "text-ink-2")}>{s.name}</h1>
+          <h1 className={cx("h-page text-[34px]", (s.blocked || s.archived) && "text-ink-2")}>{s.name}</h1>
           <p className="mt-1.5 text-[13.5px] text-ink-3">
             {[
               s.grade || "sem turma",
@@ -119,7 +119,7 @@ export function StudentDetail({
             {s.blocked && <span className="text-debt"> · fiado bloqueado</span>}
             {s.archived && <span> · arquivado</span>}
           </p>
-          {s.notes && <p className="mt-4 inline-block border-l-2 border-warn bg-warn-soft px-3 py-1.5 text-[13.5px]">{s.notes}</p>}
+          {s.notes && <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-warn-soft px-3.5 py-1.5 text-[13px] text-warn"><span className="h-1.5 w-1.5 rounded-full bg-warn" />{s.notes}</p>}
         </div>
         <div className="no-print flex flex-wrap gap-2">
           <button className="btn btn-primary" onClick={() => openSale(s.id)}>
@@ -134,13 +134,13 @@ export function StudentDetail({
             </button>
           )}
           <div className="relative">
-            <button className="btn btn-secondary btn-icon h-9 w-9" onClick={() => setMenu((m) => !m)} aria-label="Mais opções">
+            <button className="btn btn-secondary btn-icon" onClick={() => setMenu((m) => !m)} aria-label="Mais opções">
               <MoreHorizontal size={17} strokeWidth={1.75} />
             </button>
             {menu && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setMenu(false)} />
-                <div className="absolute right-0 z-20 mt-1.5 w-52 animate-in rounded-md border border-line bg-surface py-1 shadow-lg">
+                <div className="absolute right-0 z-20 mt-2 w-56 animate-in rounded-2xl border border-line bg-card p-1.5 shadow-2xl">
                   <MenuItem onClick={() => (setMenu(false), openStudent(s.id))}>Editar dados</MenuItem>
                   <MenuItem onClick={() => (setMenu(false), setTimeout(() => window.print(), 50))}>Imprimir extrato</MenuItem>
                   <MenuItem onClick={() => toggle("blocked")}>{s.blocked ? "Liberar fiado" : "Bloquear fiado"}</MenuItem>
@@ -156,7 +156,7 @@ export function StudentDetail({
         </div>
       </header>
 
-      <div className="mt-8 grid grid-cols-2 border-y border-line md:grid-cols-4">
+      <div className="mt-7 grid grid-cols-2 gap-3 md:grid-cols-4">
         <Fact label={summary.balance < 0 ? "Crédito" : "Deve"}>
           <span className="figure text-[32px] leading-none">
             <BalanceText cents={summary.balance} />
@@ -190,10 +190,10 @@ export function StudentDetail({
         </Fact>
       </div>
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_280px]">
-        <section>
-          <div className="mb-1 flex items-baseline justify-between gap-3">
-            <h2 className="font-serif text-[22px]">Extrato</h2>
+      <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_300px]">
+        <section className="panel p-5">
+          <div className="mb-3 flex items-baseline justify-between gap-3">
+            <h2 className="h-sec text-[16px]">Extrato</h2>
             <span className="text-[12.5px] text-ink-3">
               comprou {money(summary.totalBought)} · pagou {money(summary.totalPaid)}
             </span>
@@ -255,9 +255,9 @@ export function StudentDetail({
           )}
         </section>
 
-        <aside className="space-y-10">
-          <section>
-            <h2 className="mb-1 font-serif text-[22px]">Em aberto</h2>
+        <aside className="space-y-6">
+          <section className="panel p-5">
+            <h2 className="mb-3 h-sec text-[16px]">Em aberto</h2>
             {summary.openPurchases.length === 0 ? (
               <p className="border-t border-line pt-3 text-[13.5px] text-ink-3">Nada. Está tudo pago.</p>
             ) : (
@@ -274,8 +274,8 @@ export function StudentDetail({
             )}
           </section>
 
-          <section>
-            <h2 className="mb-1 font-serif text-[22px]">Cobranças</h2>
+          <section className="panel p-5">
+            <h2 className="mb-3 h-sec text-[16px]">Cobranças</h2>
             {charges.length === 0 ? (
               <p className="border-t border-line pt-3 text-[13.5px] text-ink-3">Nenhuma cobrança registrada.</p>
             ) : (
@@ -299,8 +299,8 @@ export function StudentDetail({
 
 function Fact({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="border-line py-5 pr-4 even:border-l even:pl-5 md:border-l md:pl-5 md:first:border-l-0 md:first:pl-0 [&:nth-child(n+3)]:border-t md:[&:nth-child(n+3)]:border-t-0">
-      <div className="mb-1.5 text-[12.5px] text-ink-3">{label}</div>
+    <div className="panel p-5">
+      <div className="mb-2.5 text-[12.5px] text-ink-3">{label}</div>
       {children}
     </div>
   );
@@ -310,7 +310,7 @@ function MenuItem({ children, onClick, danger }: { children: React.ReactNode; on
   return (
     <button
       onClick={onClick}
-      className={cx("block w-full px-3.5 py-2 text-left text-[13.5px] transition-colors hover:bg-sunken", danger && "text-debt")}
+      className={cx("block w-full rounded-xl px-3 py-2 text-left text-[13.5px] transition-colors hover:bg-sunken", danger && "text-debt")}
     >
       {children}
     </button>

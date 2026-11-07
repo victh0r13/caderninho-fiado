@@ -128,7 +128,7 @@ function Inner({ studentId, onClose }: { studentId: string; onClose: () => void 
           {pix ? (
             <>
               <p className="text-[12px] text-ink-3">Pix de {money(summary.balance)}</p>
-              <div className="mt-2 rounded-md border border-line bg-white p-3">
+              <div className="mt-2 rounded-2xl border border-line bg-white p-3">
                 {qr ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={qr} alt="QR Code Pix" className="w-full" />
@@ -151,7 +151,7 @@ function Inner({ studentId, onClose }: { studentId: string; onClose: () => void 
               </label>
             </>
           ) : (
-            <p className="border-l-2 border-line-strong pl-3 text-[13px] leading-relaxed text-ink-3">
+            <p className="rounded-2xl border border-dashed border-line-strong p-4 text-[13px] leading-relaxed text-ink-3">
               Cadastre sua chave Pix em{" "}
               <Link href="/configuracoes" className="text-ink underline underline-offset-2" onClick={onClose}>
                 Ajustes

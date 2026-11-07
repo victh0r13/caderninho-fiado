@@ -143,15 +143,15 @@ function SaleDialogInner({ initialStudentId, onClose }: { initialStudentId?: str
       {(summary.student.notes || summary.student.blocked || willExceed) && (
         <div className="mb-5 space-y-2">
           {summary.student.notes && (
-            <p className="border-l-2 border-warn bg-warn-soft px-3 py-2 text-[13.5px]">{summary.student.notes}</p>
+            <p className="rounded-xl bg-warn-soft px-3.5 py-2.5 text-[13.5px] text-warn">{summary.student.notes}</p>
           )}
           {summary.student.blocked && (
-            <p className="border-l-2 border-debt bg-debt-soft px-3 py-2 text-[13.5px]">
+            <p className="rounded-xl bg-debt-soft px-3.5 py-2.5 text-[13.5px] text-debt">
               O fiado deste aluno está <b>bloqueado</b>. Só anote se combinou com o responsável.
             </p>
           )}
           {willExceed && (
-            <p className="border-l-2 border-debt bg-debt-soft px-3 py-2 text-[13.5px]">
+            <p className="rounded-xl bg-debt-soft px-3.5 py-2.5 text-[13.5px] text-debt">
               Com este lanche passa do limite de {money(summary.limit)}.
             </p>
           )}
@@ -179,14 +179,14 @@ function SaleDialogInner({ initialStudentId, onClose }: { initialStudentId?: str
                     add(p, -1);
                   }}
                   className={cx(
-                    "relative flex min-h-[64px] flex-col justify-between rounded-md border px-3 py-2.5 text-left transition-colors active:bg-sunken",
-                    q > 0 ? "border-ink bg-surface" : "border-line bg-surface hover:border-line-strong",
+                    "relative flex min-h-[68px] flex-col justify-between rounded-2xl px-3.5 py-3 text-left transition active:scale-[0.98]",
+                    q > 0 ? "gloss ring-1 ring-accent/60" : "border border-line hover:border-line-strong hover:bg-sunken",
                   )}
                 >
                   <span className="pr-6 text-[14px] leading-snug">{p.name}</span>
                   <span className="tabular text-[12.5px] text-ink-3">{money(p.price)}</span>
                   {q > 0 && (
-                    <span className="tabular absolute top-2 right-2 grid h-5 min-w-5 place-items-center rounded bg-ink px-1 text-[11.5px] font-semibold text-paper">
+                    <span className="tabular absolute top-2.5 right-2.5 grid h-5 min-w-5 place-items-center rounded-full bg-accent px-1.5 text-[11.5px] font-semibold text-white">
                       {q}
                     </span>
                   )}

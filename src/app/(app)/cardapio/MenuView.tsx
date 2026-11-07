@@ -35,11 +35,11 @@ export function MenuView() {
           }
         />
       ) : (
-        <div className="grid gap-x-14 gap-y-10 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {categories.map((cat) => (
-            <section key={cat}>
-              <h2 className="mb-1 font-serif text-[22px]">{cat}</h2>
-              <ul className="border-t border-line">
+            <section key={cat} className="panel p-5">
+              <h2 className="mb-3 h-sec text-[16px]">{cat}</h2>
+              <ul>
                 {data.products
                   .filter((p) => p.category === cat)
                   .map((p) => (
@@ -47,14 +47,14 @@ export function MenuView() {
                       <button
                         onClick={() => setEditing(p)}
                         className={cx(
-                          "flex w-full items-baseline border-b border-line py-2.5 text-left text-[14.5px] transition-colors hover:bg-surface",
+                          "-mx-2 flex w-[calc(100%+16px)] items-baseline rounded-xl px-2 py-2.5 text-left text-[14.5px] transition-colors hover:bg-sunken",
                           !p.active && "text-ink-3",
                         )}
                       >
                         <span>{p.name}</span>
                         {!p.active && <span className="ml-2 text-[12px]">fora do cardápio</span>}
                         <span className="leader" />
-                        <span className="figure text-[16px]">{moneyPlain(p.price)}</span>
+                        <span className="figure text-[15px]">{moneyPlain(p.price)}</span>
                       </button>
                     </li>
                   ))}

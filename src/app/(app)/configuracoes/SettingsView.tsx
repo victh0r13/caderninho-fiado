@@ -6,6 +6,7 @@ import { restoreBackup, saveSettings, wipeAll } from "@/app/actions";
 import { changePin, setLockMinutes } from "@/app/auth-actions";
 import { useApp } from "@/components/AppShell";
 import { MoneyInput, PageHeader, useConfirm, useToast } from "@/components/ui";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { buildChargeMessage, DEFAULT_TEMPLATE } from "@/lib/message";
 import { normalizePixKey } from "@/lib/pix";
 import type { Settings, StudentSummary } from "@/lib/types";
@@ -149,6 +150,11 @@ export function SettingsView({
   return (
     <div className="animate-in pb-28">
       <PageHeader title="Ajustes" />
+      <Row title="Aparência" desc="Claro, escuro ou automático (acompanha o modo do Mac).">
+        <div className="max-w-sm">
+          <ThemeToggle withLabels />
+        </div>
+      </Row>
 
       <Row title="A cantina" desc="Aparecem no topo do sistema e nas mensagens de cobrança.">
         <div className="grid gap-4 sm:grid-cols-2">
@@ -203,7 +209,7 @@ export function SettingsView({
       <Row title="Mensagem de cobrança" desc="O texto que vai para o WhatsApp. Clique num campo para inserir onde está o cursor.">
         <div className="mb-2 flex flex-wrap gap-1">
           {VARS.map(([v, label]) => (
-            <button key={v} className="rounded border border-line px-1.5 py-0.5 font-mono text-[11.5px] text-ink-2 hover:border-line-strong hover:text-ink" title={label} onClick={() => insertVar(v)}>
+            <button key={v} className="rounded-full border border-line-strong px-2.5 py-1 font-mono text-[11.5px] text-ink-2 hover:text-ink" title={label} onClick={() => insertVar(v)}>
               {v}
             </button>
           ))}
@@ -219,7 +225,7 @@ export function SettingsView({
           </button>
         </div>
         <p className="mt-5 mb-1.5 text-[12.5px] text-ink-3">Como chega para {sample === SAMPLE ? "o responsável" : sample.student.guardianName || "o responsável"}</p>
-        <div className="rounded-md border border-line bg-sunken p-4 text-[13.5px] leading-relaxed whitespace-pre-wrap">
+        <div className="rounded-2xl rounded-tr-md border border-line bg-paid-soft p-4 text-[13.5px] leading-relaxed whitespace-pre-wrap">
           {buildChargeMessage(s, sample)}
         </div>
       </Row>
@@ -291,13 +297,13 @@ export function SettingsView({
       </Row>
 
       {dirty && (
-        <div className="no-print fixed inset-x-0 bottom-5 z-40 flex justify-center px-4 md:pl-[232px]">
-          <div className="flex animate-in items-center gap-3 rounded-md bg-ink py-1.5 pr-1.5 pl-4 text-[13.5px] text-paper shadow-lg">
+        <div className="no-print fixed inset-x-0 bottom-5 z-40 flex justify-center px-4 md:pl-[280px]">
+          <div className="flex animate-in items-center gap-3 rounded-full bg-ink py-1.5 pr-1.5 pl-5 text-[13.5px] text-surface shadow-xl">
             Alterações não salvas
-            <button className="px-2 text-paper/70 hover:text-paper" onClick={() => setS(data.settings)}>
+            <button className="px-2 opacity-70 hover:opacity-100" onClick={() => setS(data.settings)}>
               Descartar
             </button>
-            <button className="btn btn-sm h-8 bg-paper text-ink hover:opacity-90" disabled={pending} onClick={save}>
+            <button className="btn btn-sm h-8 bg-surface text-ink hover:opacity-90" disabled={pending} onClick={save}>
               {pending ? "Salvando…" : "Salvar"}
             </button>
           </div>
@@ -383,7 +389,7 @@ function PinRow({ lockMinutes, onSaved }: { lockMinutes: number; onSaved: () => 
 
 function Row({ title, desc, children }: { title: string; desc?: string; children: React.ReactNode }) {
   return (
-    <section className="grid gap-4 border-t border-line py-8 md:grid-cols-[220px_1fr] md:gap-10">
+    <section className="panel mb-4 grid gap-4 p-6 md:grid-cols-[220px_1fr] md:gap-10">
       <div>
         <h2 className="text-[14px] font-semibold">{title}</h2>
         {desc && <p className="mt-1 text-[13px] leading-snug text-ink-3">{desc}</p>}

@@ -119,16 +119,16 @@ export function HistoryView({
         ))}
       </div>
 
-      <div className="grid grid-cols-3 border-b border-line">
+      <div className="mt-5 grid grid-cols-3 gap-3">
         {[
           ["Fiado", sold, ""],
           ["Recebido", received, "text-paid"],
           ["Descontos", discounts, "text-ink-3"],
         ].map(([label, v, color], i) => (
-          <div key={label as string} className={cx("py-5", i > 0 && "border-l border-line pl-5")}>
+          <div key={label as string} className="panel p-5">
             <div className="text-[12.5px] text-ink-3">{label}</div>
-            <div className={cx("figure mt-1 text-[28px] leading-none", color as string)}>
-              <span className="text-[15px] text-ink-3">R$ </span>
+            <div className={cx("figure mt-3 text-[28px] leading-none", color as string)}>
+              <span className="text-[15px] font-medium text-ink-3">R$ </span>
               {moneyPlain(v as number)}
             </div>
           </div>
@@ -136,7 +136,7 @@ export function HistoryView({
       </div>
 
       <div className="mt-6 mb-2 flex flex-wrap items-center gap-3">
-        <div className="flex overflow-hidden rounded-md border border-line-strong text-[13px]">
+        <div className="flex rounded-full border border-line-strong p-0.5 text-[13px]">
           {(
             [
               ["todos", "Tudo"],
@@ -148,9 +148,8 @@ export function HistoryView({
               key={id}
               onClick={() => setKind(id)}
               className={cx(
-                "h-8 px-3 transition-colors",
-                i > 0 && "border-l border-line-strong",
-                kind === id ? "bg-ink text-paper" : "bg-surface text-ink-2 hover:bg-sunken",
+                "h-7 rounded-full px-3.5 transition",
+                kind === id ? "gloss text-ink" : "border border-transparent text-ink-2 hover:text-ink",
               )}
             >
               {label}
@@ -159,13 +158,14 @@ export function HistoryView({
         </div>
         <div className="relative ml-auto w-full sm:w-72">
           <Search size={15} strokeWidth={1.75} className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-ink-3" />
-          <input className="input h-8 pl-9 text-[13px]" placeholder="Buscar aluno ou item" value={q} onChange={(e) => setQ(e.target.value)} />
+          <input className="input h-9 rounded-full pl-9 text-[13px]" placeholder="Buscar aluno ou item" value={q} onChange={(e) => setQ(e.target.value)} />
         </div>
       </div>
 
       {groups.length === 0 ? (
-        <EmptyState title="Nada neste período." text="Troque o período ou limpe a busca." />
+        <div className="panel mt-4"><EmptyState title="Nada neste período." text="Troque o período ou limpe a busca." /></div>
       ) : (
+        <div className="panel mt-4 overflow-x-auto px-5 pb-4">
         <table className="w-full text-[14px]">
           {groups.map((g) => (
             <tbody key={g.key}>
@@ -204,6 +204,7 @@ export function HistoryView({
             </tbody>
           ))}
         </table>
+        </div>
       )}
       {list.length > 500 && <p className="mt-4 text-center text-[12.5px] text-ink-3">Mostrando os 500 mais recentes. Use os filtros ou a planilha.</p>}
     </div>

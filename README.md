@@ -24,7 +24,7 @@ Roda **no próprio MacBook**, sem internet e sem mensalidade. Os dados ficam só
 | **Lançar em outra data** | Para passar as anotações do caderno de papel para o sistema. |
 | **Backup automático** | Uma cópia por dia (guarda os últimos 60 dias), além de backup/restauração manual. |
 | **PIN de 4 números** | Criado no primeiro acesso. Pedido ao abrir e quando o sistema fica parado (tempo ajustável). Botão **Bloquear** no canto. |
-| **Modo escuro** | Acompanha o modo claro/escuro do Mac. |
+| **Tema claro e escuro** | Escolha no menu lateral ou em Ajustes → Aparência: claro, escuro ou automático (segue o Mac). |
 
 ### Atalhos de teclado
 - **F** — anotar fiado · **R** — receber pagamento · **⌘K** ou **/** — buscar aluno
